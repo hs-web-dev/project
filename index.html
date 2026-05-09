@@ -4,8 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>H.Tech — Portfolio</title>
+
+  <!-- POLICES -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@300;400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -19,8 +22,8 @@
       <a href="#contact">Contact</a>
     </nav>
     <div class="header-right">
-      <button class="btn-connexion">Connexion</button>
-      <button class="btn-essai">Voir le CV</button>
+      <!-- Connexion vers Render -->
+      <a href="https://ton-backend.onrender.com/login" class="btn-connexion">Connexion</a>
     </div>
   </header>
 
@@ -30,10 +33,15 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-tag">Développeur Full-Stack &amp; IA</div>
-      <h1>Construire<br>le <em>futur.</em></h1>
+
+      <!-- Police changée -->
+      <h1 class="hero-title-alt">Construire<br>le <em>futur.</em></h1>
+
       <p class="hero-sub">Code, architecture, et intelligence artificielle — des projets pensés pour durer dans un monde en constante évolution.</p>
+
       <div class="hero-cta">
         <button class="btn-primary" id="scroll-to-projects">Voir mes projets</button>
+
         <button class="btn-ghost">
           Me contacter
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -42,6 +50,7 @@
         </button>
       </div>
     </div>
+
     <div class="scroll-hint">
       <span>Scroll</span>
       <div class="scroll-line"></div>

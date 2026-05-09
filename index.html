@@ -2,27 +2,70 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Accueil</title>
+  <title>H — Tech Portfolio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
+  <!-- HEADER -->
   <header>
-    <div class="logo">Nova.</div>
+    <div class="logo">H.Tech</div>
+    <nav>
+      <a href="#projets">Projets</a>
+      <a href="#contact">Contact</a>
+    </nav>
     <button class="login-btn">Connexion</button>
   </header>
 
+  <!-- HERO -->
   <section class="hero">
     <div class="text">
-      <h1>Trouvez votre espace.</h1>
-      <p>Un lieu simple, moderne et élégant pour commencer votre expérience.</p>
-      <button class="cta-btn">Commencer</button>
+      <h1>Construire le futur.</h1>
+      <p>Découvrez mes projets tech, mes créations, et mes expériences dans le développement moderne.</p>
+      <button class="cta-btn">Voir mes projets</button>
     </div>
 
     <div class="image">
-      <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1200&q=80" alt="Hero Image">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Tech Image">
     </div>
   </section>
+
+  <!-- PROJETS -->
+  <section id="projets" class="projects">
+    <h2>Mes Projets</h2>
+
+    <div class="project-grid">
+
+      <div class="project-card">
+        <h3>Assistant Vocal IA</h3>
+        <p>Assistant complet avec API, contrôle matériel, et intégration temps réel.</p>
+      </div>
+
+      <div class="project-card">
+        <h3>Soundboard YouTube</h3>
+        <p>Extraction audio YouTube + interface moderne + backend Node.</p>
+      </div>
+
+      <div class="project-card">
+        <h3>Site Web Dynamique</h3>
+        <p>Frontend moderne, animations, API, design responsive.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <h2>Me Contacter</h2>
+    <p>Envie de collaborer ou de discuter d’un projet ?</p>
+    <button class="contact-btn">Envoyer un message</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 H.Tech — Tous droits réservés
+  </footer>
 
   <script src="script.js"></script>
 </body>

@@ -726,3 +726,7 @@ footer {
     padding: 2rem 1.5rem;
   }
 }
+/* Police spéciale pour le titre du hero */
+.hero-title-alt {
+  font-family: 'Poppins', sans-serif !important;
+}

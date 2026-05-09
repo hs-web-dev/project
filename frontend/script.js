@@ -205,4 +205,8 @@ if (loginBtn) {
     loginOverlay.style.display = "none";
     location.reload();
   });
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 58b86651903c6fc91a6bb546771576af837f3446

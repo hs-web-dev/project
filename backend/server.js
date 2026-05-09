@@ -57,4 +57,8 @@ app.post("/auth/login", async (req, res) => {
 });
 
 // Lancer serveur
+<<<<<<< HEAD
 app.listen(3000, () => console.log("Backend en ligne sur port 3000"));
+=======
+app.listen(3000, () => console.log("Backend en ligne sur port 3000"));
+>>>>>>> 58b86651903c6fc91a6bb546771576af837f3446

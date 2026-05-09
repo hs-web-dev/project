@@ -23,7 +23,6 @@ revealEls.forEach((el) => revealObserver.observe(el));
 // ── HERO IMAGE PARALLAX LOAD ──
 const heroBg = document.querySelector('.hero-img');
 if (heroBg) {
-  // Trigger slow-zoom animation once image is loaded
   const img = new Image();
   img.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=80';
   img.onload = () => heroBg.classList.add('loaded');
@@ -57,7 +56,6 @@ if (codeTextEl) {
 
   function typeChar() {
     if (lineIndex >= codeLines.length) {
-      // Restart after pause
       setTimeout(() => {
         lineIndex = 0;
         charIndex = 0;
@@ -134,7 +132,6 @@ const countObserver = new IntersectionObserver(
         const el  = entry.target;
         const raw = el.textContent.trim();
 
-        // Only animate pure numbers (skip "∞" or symbols)
         const num = parseInt(raw, 10);
         if (isNaN(num)) return;
 
@@ -159,3 +156,53 @@ const countObserver = new IntersectionObserver(
 );
 
 statNums.forEach((el) => countObserver.observe(el));
+
+
+
+/* ==============================
+   LOGIN POPUP
+   ============================== */
+
+const loginOverlay = document.getElementById("login-overlay");
+const openLogin = document.getElementById("open-login");
+const closeLogin = document.getElementById("close-login");
+
+if (openLogin) {
+  openLogin.addEventListener("click", () => {
+    loginOverlay.style.display = "flex";
+  });
+}
+
+if (closeLogin) {
+  closeLogin.addEventListener("click", () => {
+    loginOverlay.style.display = "none";
+  });
+}
+
+
+// ── LOGIN REQUEST TO RENDER ──
+const loginBtn = document.getElementById("login-submit");
+
+if (loginBtn) {
+  loginBtn.addEventListener("click", async () => {
+    const email = document.getElementById("login-email").value.trim();
+    const password = document.getElementById("login-password").value.trim();
+
+    const res = await fetch("https://ton-backend.onrender.com/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      document.getElementById("login-error").style.display = "block";
+      return;
+    }
+
+    localStorage.setItem("token", data.token);
+    loginOverlay.style.display = "none";
+    location.reload();
+  });
+}

@@ -726,12 +726,8 @@ footer {
     padding: 2rem 1.5rem;
   }
 }
-/* Police spéciale pour le titre du hero */
-.hero-title-alt {
-  font-family: 'Poppins', sans-serif !important;
-}
-/* LOGIN POPUP */
-.login-overlay {
+/* ── POPUP LOGIN ── */
+.login-popup {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
@@ -742,80 +738,44 @@ footer {
   z-index: 200;
 }
 
-.login-modal {
-  background: var(--surface);
-  padding: 3rem;
+.login-popup.active {
+  display: flex;
+}
+
+.login-box {
+  background: var(--surface2);
+  padding: 2.5rem;
   border-radius: 1rem;
-  border: 1px solid var(--border);
-  width: 100%;
-  max-width: 420px;
+  width: 320px;
   position: relative;
+  border: 1px solid var(--border);
   animation: fadeUp 0.4s ease;
 }
 
-.login-modal h2 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
+.login-box h3 {
+  font-family: var(--serif);
   margin-bottom: 1.5rem;
-  text-align: center;
+  font-size: 1.6rem;
 }
 
-.input-group {
-  margin-bottom: 1.5rem;
-}
-
-.input-group label {
-  display: block;
-  font-size: 0.85rem;
-  margin-bottom: 0.4rem;
-  color: var(--muted);
-}
-
-.input-group input {
+.login-box input {
   width: 100%;
   padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
   border-radius: 0.5rem;
   border: 1px solid var(--border);
-  background: var(--surface2);
+  background: var(--surface);
   color: var(--text);
-  font-size: 0.95rem;
-}
-
-.btn-login {
-  width: 100%;
-  padding: 0.9rem;
-  background: var(--accent);
-  color: var(--bg);
-  border: none;
-  border-radius: 999px;
   font-size: 0.9rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: 0.3s;
 }
 
-.btn-login:hover {
-  background: var(--accent2);
-}
-
-.close-login {
+.close-popup {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 12px;
+  right: 12px;
   background: none;
   border: none;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   color: var(--muted);
   cursor: pointer;
 }
-
-.error {
-  margin-top: 1rem;
-  color: #ff6b6b;
-  text-align: center;
-  display: none;
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> 58b86651903c6fc91a6bb546771576af837f3446

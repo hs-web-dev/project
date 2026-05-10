@@ -1,20 +1,19 @@
 {
-  "name": "auth-backend",
+  "name": "boxeo-backend",
   "version": "1.0.0",
   "type": "module",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
-    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.0.0"
+    "mongoose": "^7.0.3"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 58b86651903c6fc91a6bb546771576af837f3446

@@ -779,3 +779,85 @@ footer {
   color: var(--muted);
   cursor: pointer;
 }
+/* POPUP SYSTEM */
+.login-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.login-popup.active {
+  display: flex;
+}
+
+.login-box {
+  background: var(--surface2);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  width: 320px;
+  position: relative;
+  border: 1px solid var(--border);
+  animation: fadeUp 0.4s ease;
+}
+
+.login-box h3 {
+  font-family: var(--serif);
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.popup-switch {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.popup-switch span {
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.close-popup {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+/* CODE 6 CHIFFRES */
+.verify-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0 1.5rem;
+}
+
+.vcode {
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.4rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}

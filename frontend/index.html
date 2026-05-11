@@ -196,8 +196,8 @@
     </div>
   </footer>
 
-  <!-- POPUP LOGIN -->
-  <div class="login-popup" id="login-popup">
+  <!-- POPUP CONNEXION -->
+  <div class="login-popup" id="popup-login">
     <div class="login-box">
       <h3>Connexion</h3>
 
@@ -206,7 +206,52 @@
 
       <button class="btn-primary" id="login-submit">Se connecter</button>
 
-      <button class="close-popup" id="close-login">×</button>
+      <p class="popup-switch">
+        Pas de compte ?
+        <span id="open-register">Créer un compte</span>
+      </p>
+
+      <button class="close-popup" data-close>×</button>
+    </div>
+  </div>
+
+  <!-- POPUP INSCRIPTION -->
+  <div class="login-popup" id="popup-register">
+    <div class="login-box">
+      <h3>Créer un compte</h3>
+
+      <input type="email" id="reg-email" placeholder="Email" />
+      <input type="password" id="reg-password" placeholder="Mot de passe" />
+
+      <button class="btn-primary" id="register-submit">Créer mon compte</button>
+
+      <p class="popup-switch">
+        Déjà un compte ?
+        <span id="open-login-from-register">Connexion</span>
+      </p>
+
+      <button class="close-popup" data-close>×</button>
+    </div>
+  </div>
+
+  <!-- POPUP VÉRIFICATION EMAIL -->
+  <div class="login-popup" id="popup-verify">
+    <div class="login-box">
+      <h3>Vérification email</h3>
+      <p class="verify-text">Un code à 6 chiffres a été envoyé à votre email.</p>
+
+      <div class="verify-inputs">
+        <input maxlength="1" class="vcode" />
+        <input maxlength="1" class="vcode" />
+        <input maxlength="1" class="vcode" />
+        <input maxlength="1" class="vcode" />
+        <input maxlength="1" class="vcode" />
+        <input maxlength="1" class="vcode" />
+      </div>
+
+      <button class="btn-primary" id="verify-submit">Vérifier</button>
+
+      <button class="close-popup" data-close>×</button>
     </div>
   </div>
 

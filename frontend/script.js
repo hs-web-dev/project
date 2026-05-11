@@ -1,7 +1,3 @@
-/* ==============================
-   H.Tech — script.js
-   ============================== */
-
 // ── SCROLL REVEAL ──
 const revealEls = document.querySelectorAll('.reveal');
 
@@ -23,7 +19,6 @@ revealEls.forEach((el) => revealObserver.observe(el));
 // ── HERO IMAGE PARALLAX LOAD ──
 const heroBg = document.querySelector('.hero-img');
 if (heroBg) {
-  // Trigger slow-zoom animation once image is loaded
   const img = new Image();
   img.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=80';
   img.onload = () => heroBg.classList.add('loaded');
@@ -57,7 +52,6 @@ if (codeTextEl) {
 
   function typeChar() {
     if (lineIndex >= codeLines.length) {
-      // Restart after pause
       setTimeout(() => {
         lineIndex = 0;
         charIndex = 0;
@@ -98,81 +92,21 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
-// ── STAGGERED CARD ENTRANCE ──
-const projectCards = document.querySelectorAll('.project-card');
+// ── POPUP SYSTEM ──
+const popupLogin = document.getElementById("popup-login");
+const popupRegister = document.getElementById("popup-register");
+const popupVerify = document.getElementById("popup-verify");
 
-const cardObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }, i * 120);
-        cardObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.08 }
-);
+document.getElementById("open-login").onclick = () => popupLogin.classList.add("active");
 
-projectCards.forEach((card) => {
-  card.style.opacity = '0';
-  card.style.transform = 'translateY(20px)';
-  card.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.4s';
-  cardObserver.observe(card);
-});
+document.getElementById("open-register").onclick = () => {
+  popupLogin.classList.remove("active");
+  popupRegister.classList.add("active");
+};
 
+document.getElementById("open-login-from-register").onclick = () => {
+  popupRegister.classList.remove("active");
+  popupLogin.classList.add("active");
+};
 
-// ── STAT NUMBER COUNT-UP ──
-const statNums = document.querySelectorAll('.stat-num');
-
-const countObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const el  = entry.target;
-        const raw = el.textContent.trim();
-
-        // Only animate pure numbers (skip "∞" or symbols)
-        const num = parseInt(raw, 10);
-        if (isNaN(num)) return;
-
-        const suffix = raw.replace(String(num), '');
-        let current  = 0;
-        const step   = Math.ceil(num / 30);
-
-        const tick = setInterval(() => {
-          current += step;
-          if (current >= num) {
-            current = num;
-            clearInterval(tick);
-          }
-          el.textContent = current + suffix;
-        }, 40);
-
-        countObserver.unobserve(el);
-      }
-    });
-  },
-  { threshold: 0.5 }
-);
-
-statNums.forEach((el) => countObserver.observe(el));
-
-// ── POPUP LOGIN ──
-const loginPopup = document.getElementById("login-popup");
-const openLogin = document.getElementById("open-login");
-const closeLogin = document.getElementById("close-login");
-
-openLogin.addEventListener("click", () => {
-  loginPopup.classList.add("active");
-});
-
-closeLogin.addEventListener("click", () => {
-  loginPopup.classList.remove("active");
-});
-
-loginPopup.addEventListener("click", (e) => {
-  if (e.target === loginPopup) loginPopup.classList.remove("active");
-});
+document.querySelectorAll("[data-close]").forEach

@@ -184,7 +184,7 @@ document.getElementById("verify-submit").onclick = async () => {
     return;
   }
 
-  const res = await fetch("https://boxeo-p8t4.onrender.com/auth/verify-email", {
+  const res = await fetch("https://project-nqj7.onrender.com/auth/verify-email", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email: window.currentEmail, code })
@@ -215,7 +215,7 @@ document.getElementById("login-submit").onclick = async () => {
     return;
   }
 
-  const res = await fetch("https://boxeo-p8t4.onrender.com/auth/login", {
+  const res = await fetch("https://project-nqj7.onrender.com/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })

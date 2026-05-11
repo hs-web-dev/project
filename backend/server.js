@@ -11,11 +11,15 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://hs-web-dev.github.io",
+    origin: [
+      "https://hs-web-dev.github.io",
+      "https://front-2xqe.onrender.com"
+    ],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 
 mongoose
   .connect(process.env.MONGO_URI)

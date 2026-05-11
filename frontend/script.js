@@ -109,4 +109,131 @@ document.getElementById("open-login-from-register").onclick = () => {
   popupLogin.classList.add("active");
 };
 
-document.querySelectorAll("[data-close]").forEach
+document.querySelectorAll("[data-close]").forEach(btn => {
+  btn.onclick = () => {
+    btn.closest(".login-popup").classList.remove("active");
+  };
+});
+
+
+// ── REGISTER (Créer un compte) ──
+document.getElementById("register-submit").onclick = async () => {
+  const email = document.getElementById("reg-email").value;
+  const password = document.getElementById("reg-password").value;
+
+  if (!email || !password) {
+    alert("Merci de remplir email et mot de passe.");
+    return;
+  }
+
+  const res = await fetch("https://boxeo-p8t4.onrender.com/auth/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  }).then(r => r.json()).catch(err => {
+    console.error(err);
+    return { success: false, message: "Erreur réseau" };
+  });
+
+  console.log("REGISTER RESPONSE:", res);
+
+  if (res.success && res.needVerification) {
+    popupRegister.classList.remove("active");
+    popupVerify.classList.add("active");
+    window.currentEmail = email;
+  } else {
+    alert(res.message || "Erreur lors de l'inscription");
+  }
+};
+
+
+// ── GESTION DES 6 INPUTS DE CODE ──
+const vcodeInputs = document.querySelectorAll(".vcode");
+
+if (vcodeInputs.length === 6) {
+  vcodeInputs.forEach((input, idx) => {
+    input.addEventListener("input", () => {
+      if (input.value.length === 1 && idx < vcodeInputs.length - 1) {
+        vcodeInputs[idx + 1].focus();
+      }
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace" && !input.value && idx > 0) {
+        vcodeInputs[idx - 1].focus();
+      }
+    });
+  });
+}
+
+function getVerificationCode() {
+  let code = "";
+  vcodeInputs.forEach(input => {
+    code += (input.value || "").trim();
+  });
+  return code;
+}
+
+
+// ── VERIFY EMAIL ──
+document.getElementById("verify-submit").onclick = async () => {
+  const code = getVerificationCode();
+
+  if (code.length !== 6) {
+    alert("Merci de saisir les 6 chiffres du code.");
+    return;
+  }
+
+  const res = await fetch("https://boxeo-p8t4.onrender.com/auth/verify-email", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: window.currentEmail, code })
+  }).then(r => r.json()).catch(err => {
+    console.error(err);
+    return { success: false, message: "Erreur réseau" };
+  });
+
+  console.log("VERIFY RESPONSE:", res);
+
+  if (res.success) {
+    popupVerify.classList.remove("active");
+    popupLogin.classList.add("active");
+    alert("Email vérifié, vous pouvez vous connecter.");
+  } else {
+    alert(res.message || "Code incorrect ou expiré");
+  }
+};
+
+
+// ── LOGIN ──
+document.getElementById("login-submit").onclick = async () => {
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+
+  if (!email || !password) {
+    alert("Merci de remplir email et mot de passe.");
+    return;
+  }
+
+  const res = await fetch("https://boxeo-p8t4.onrender.com/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  }).then(r => r.json()).catch(err => {
+    console.error(err);
+    return { success: false, message: "Erreur réseau" };
+  });
+
+  console.log("LOGIN RESPONSE:", res);
+
+  if (res.success) {
+    alert("Connexion réussie !");
+    popupLogin.classList.remove("active");
+  } else if (res.needVerification) {
+    popupLogin.classList.remove("active");
+    popupVerify.classList.add("active");
+    window.currentEmail = email;
+  } else {
+    alert("Email ou mot de passe incorrect");
+  }
+};

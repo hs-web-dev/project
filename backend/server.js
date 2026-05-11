@@ -9,16 +9,19 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: [
-      "https://hs-web-dev.github.io",
-      "https://front-2xqe.onrender.com"
-    ],
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors({
+  origin: [
+    "https://hs-web-dev.github.io",
+    "https://front-2xqe.onrender.com"
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+}));
+
+// IMPORTANT : gérer les requêtes preflight OPTIONS
+app.options("*", cors());
+
 
 
 mongoose

@@ -126,7 +126,7 @@ document.getElementById("register-submit").onclick = async () => {
     return;
   }
 
-  const res = await fetch("https://boxeo-p8t4.onrender.com/auth/register", {
+  const res = await fetch("https://project-nqj7.onrender.com", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })

@@ -930,19 +930,11 @@ footer {
   background: rgba(255, 255, 255, 0.05);
 }
 /* ==============================
-   PROJECTS SLIDER
+   PROJECTS SLIDER — IMAGE FULL + TEXT OVERLAY
    ============================== */
 
 .projects-slider-section {
   padding: 6rem 0;
-  margin-top: 4rem;
-}
-
-.slider-title {
-  text-align: center;
-  font-family: var(--serif);
-  font-size: 3rem;
-  margin-bottom: 3rem;
 }
 
 .projects-slider {
@@ -950,7 +942,7 @@ footer {
   gap: 2rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 2rem;
+  padding: 1rem;
   scrollbar-width: none;
 }
 
@@ -960,48 +952,43 @@ footer {
 
 .project-slide {
   min-width: 380px;
-  height: 480px;
-  background: rgba(255,255,255,0.03);
-  border-radius: 1.4rem;
-  overflow: hidden;
-  position: relative;
   scroll-snap-align: center;
   cursor: grab;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-slide:active {
-  cursor: grabbing;
-}
-
-.project-slide:hover {
-  transform: scale(1.06) translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
 .project-img {
-  height: 65%;
+  width: 380px;
+  height: 380px; /* carré parfait */
   background-size: cover;
   background-position: center;
-  transition: transform 0.5s ease;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease;
 }
 
-.project-slide:hover .project-img {
-  transform: scale(1.15);
+.project-img:hover {
+  transform: scale(1.05);
 }
 
-.project-info {
+.project-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   padding: 1.4rem;
+  width: 100%;
+  color: white;
+  z-index: 2;
 }
 
-.project-info h3 {
+.project-overlay h3 {
   font-family: var(--serif);
   font-size: 1.6rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.4rem;
 }
 
-.project-info p {
-  color: var(--muted);
+.project-overlay p {
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.4;
 }
+

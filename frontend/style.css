@@ -929,3 +929,79 @@ footer {
 .lang-dropdown button:hover {
   background: rgba(255, 255, 255, 0.05);
 }
+/* ==============================
+   PROJECTS SLIDER
+   ============================== */
+
+.projects-slider-section {
+  padding: 6rem 0;
+  margin-top: 4rem;
+}
+
+.slider-title {
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 3rem;
+  margin-bottom: 3rem;
+}
+
+.projects-slider {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 2rem;
+  scrollbar-width: none;
+}
+
+.projects-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.project-slide {
+  min-width: 380px;
+  height: 480px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 1.4rem;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: center;
+  cursor: grab;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-slide:active {
+  cursor: grabbing;
+}
+
+.project-slide:hover {
+  transform: scale(1.06) translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.project-img {
+  height: 65%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.project-slide:hover .project-img {
+  transform: scale(1.15);
+}
+
+.project-info {
+  padding: 1.4rem;
+}
+
+.project-info h3 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.project-info p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}

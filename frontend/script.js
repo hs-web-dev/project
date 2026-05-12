@@ -307,7 +307,7 @@ if (langBtn && langDropdown && langSwitch) {
       // Affichage du bouton
       langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
 
-      // Charge la langue sans recharger la page
+      // Charger la langue
       loadLanguage(lang);
     };
   });
@@ -344,4 +344,3 @@ window.addEventListener("load", () => {
 
   loadLanguage(lang);
 });
-

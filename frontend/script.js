@@ -281,7 +281,7 @@ const langSwitch = document.getElementById("lang-switch");
 const langDropdown = document.getElementById("lang-dropdown");
 const langBtn = langSwitch.querySelector(".lang-btn");
 
-// Ouvrir / fermer
+// Ouvrir / fermer le menu
 langBtn.onclick = (e) => {
   e.stopPropagation();
   langDropdown.style.display =
@@ -297,14 +297,30 @@ document.addEventListener("click", (e) => {
 
 // Changer la langue
 langDropdown.querySelectorAll("button").forEach((btn) => {
-  btn.onclick = (e) => {
-    e.stopPropagation();
+  btn.onclick = () => {
     const lang = btn.dataset.lang;
+
+    // Sauvegarde
     localStorage.setItem("lang", lang);
+
+    // Affichage du bouton
     langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
-    loadLanguage(lang);
+
+    // Recharge la page
+    location.reload();
   };
 });
+
+/* ============================
+   INIT — Charger la langue
+   ============================ */
+window.addEventListener("load", () => {
+  const lang = localStorage.getItem("lang") || "fr";
+
+  // Affiche la langue actuelle sur le bouton
+  langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
+});
+
 
 /* ============================
    LOAD TRANSLATION

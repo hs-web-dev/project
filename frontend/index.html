@@ -17,9 +17,9 @@
     <div class="logo">H.Tech</div>
 
     <nav>
-      <a href="#projets">Projets</a>
-      <a href="#about">À propos</a>
-      <a href="#contact">Contact</a>
+      <a href="#projets" data-i18n="nav_projects">Projets</a>
+      <a href="#about" data-i18n="nav_about">À propos</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
     </nav>
 
     <div class="header-right">
@@ -38,19 +38,19 @@
       </div>
 
       <!-- BOUTON CONNEXION -->
-      <button class="btn-connexion" id="open-login">Connexion</button>
+      <button class="btn-connexion" id="open-login" data-i18n="login">Connexion</button>
 
       <!-- MENU COMPTE -->
       <div class="account-menu" id="account-menu">
         <button class="account-btn" id="open-account-menu">
-          Compte
+          <span data-i18n="account">Compte</span>
           <span class="account-avatar">H</span>
         </button>
 
         <div class="account-dropdown" id="account-dropdown">
           <div class="account-email" id="account-email"></div>
-          <button class="account-item" id="delete-account">Supprimer le compte</button>
-          <button class="account-item" id="logout-btn">Déconnexion</button>
+          <button class="account-item" id="delete-account" data-i18n="delete_account">Supprimer le compte</button>
+          <button class="account-item" id="logout-btn" data-i18n="logout">Déconnexion</button>
         </div>
       </div>
 
@@ -63,13 +63,17 @@
     <div class="hero-overlay"></div>
 
     <div class="hero-content">
-      <div class="hero-tag">Développeur Full-Stack & IA</div>
-      <h1>Construire<br>le <em>futur.</em></h1>
-      <p class="hero-sub">Code, architecture, et intelligence artificielle — des projets pensés pour durer.</p>
+      <div class="hero-tag" data-i18n="hero_tag">Développeur Full-Stack & IA</div>
+
+      <h1 data-i18n="hero_title">Construire<br>le <em>futur.</em></h1>
+
+      <p class="hero-sub" data-i18n="hero_sub">
+        Code, architecture, et intelligence artificielle — des projets pensés pour durer.
+      </p>
 
       <div class="hero-cta">
-        <button class="btn-primary" id="scroll-to-projects">Voir mes projets</button>
-        <button class="btn-ghost">
+        <button class="btn-primary" id="scroll-to-projects" data-i18n="see_projects">Voir mes projets</button>
+        <button class="btn-ghost" data-i18n="contact_me">
           Me contacter
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -79,7 +83,7 @@
     </div>
 
     <div class="scroll-hint">
-      <span>Scroll</span>
+      <span data-i18n="scroll">Scroll</span>
       <div class="scroll-line"></div>
     </div>
   </section>
@@ -88,15 +92,15 @@
   <div class="stats reveal">
     <div class="stat-item">
       <div class="stat-num">12+</div>
-      <div class="stat-label">Projets livrés</div>
+      <div class="stat-label" data-i18n="stats_projects">Projets livrés</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">3</div>
-      <div class="stat-label">Années d'expérience</div>
+      <div class="stat-label" data-i18n="stats_years">Années d'expérience</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">∞</div>
-      <div class="stat-label">Lignes de passion</div>
+      <div class="stat-label" data-i18n="stats_lines">Lignes de passion</div>
     </div>
   </div>
 
@@ -104,8 +108,8 @@
   <section id="projets" class="projects-section">
     <div class="projects-header reveal">
       <div>
-        <div class="section-eyebrow">Sélection</div>
-        <h2 class="section-title">Mes projets</h2>
+        <div class="section-eyebrow" data-i18n="selection">Sélection</div>
+        <h2 class="section-title" data-i18n="projects_title">Mes projets</h2>
       </div>
     </div>
 
@@ -113,14 +117,11 @@
       <div class="project-card featured">
         <div class="project-card-inner">
           <div>
-            <div class="project-num">01 — Projet phare</div>
-            <h3 class="project-title">Assistant Vocal IA</h3>
-            <p class="project-desc">Assistant complet avec reconnaissance vocale, API OpenAI, contrôle matériel temps réel.</p>
-            <div class="project-tags">
-              <span class="tag">Python</span>
-              <span class="tag">OpenAI</span>
-              <span class="tag">WebSockets</span>
-            </div>
+            <div class="project-num">01 —</div>
+            <h3 class="project-title" data-i18n="project_ai_assistant">Assistant Vocal IA</h3>
+            <p class="project-desc" data-i18n="project_ai_desc">
+              Assistant complet avec reconnaissance vocale, API OpenAI, contrôle matériel temps réel.
+            </p>
           </div>
 
           <div class="project-visual">
@@ -133,22 +134,14 @@
 
       <div class="project-card">
         <div class="project-num">02</div>
-        <h3 class="project-title">Soundboard YouTube</h3>
-        <p class="project-desc">Extraction audio YouTube avec interface moderne.</p>
-        <div class="project-tags">
-          <span class="tag">Node.js</span>
-          <span class="tag">Web Audio</span>
-        </div>
+        <h3 class="project-title" data-i18n="project_soundboard">Soundboard YouTube</h3>
+        <p class="project-desc" data-i18n="project_soundboard_desc">Extraction audio YouTube avec interface moderne.</p>
       </div>
 
       <div class="project-card">
         <div class="project-num">03</div>
-        <h3 class="project-title">Site Web Dynamique</h3>
-        <p class="project-desc">Frontend moderne avec animations avancées.</p>
-        <div class="project-tags">
-          <span class="tag">React</span>
-          <span class="tag">GSAP</span>
-        </div>
+        <h3 class="project-title" data-i18n="project_dynamic">Site Web Dynamique</h3>
+        <p class="project-desc" data-i18n="project_dynamic_desc">Frontend moderne avec animations avancées.</p>
       </div>
     </div>
   </section>
@@ -157,9 +150,9 @@
   <section id="about" class="about-section">
     <div class="about-inner">
       <div class="about-text reveal">
-        <div class="section-eyebrow">À propos</div>
-        <h2 class="section-title">Code avec intention.</h2>
-        <p>Développeur passionné par l'intersection entre technologie et expérience utilisateur.</p>
+        <div class="section-eyebrow" data-i18n="about">À propos</div>
+        <h2 class="section-title" data-i18n="about_title">Code avec intention.</h2>
+        <p data-i18n="about_desc">Développeur passionné par l'intersection entre technologie et expérience utilisateur.</p>
 
         <ul class="skill-list">
           <li>JavaScript</li>
@@ -173,18 +166,18 @@
 
       <div class="about-visual reveal">
         <div class="about-tile">
-          <div class="about-tile-label">Disponibilité</div>
-          <div class="about-tile-val">Ouvert aux projets</div>
+          <div class="about-tile-label" data-i18n="availability">Disponibilité</div>
+          <div class="about-tile-val" data-i18n="availability_val">Ouvert aux projets</div>
         </div>
 
         <div class="about-tile">
-          <div class="about-tile-label">Localisation</div>
+          <div class="about-tile-label" data-i18n="location">Localisation</div>
           <div class="about-tile-val">Paris, FR</div>
         </div>
 
         <div class="about-tile">
-          <div class="about-tile-label">Mode</div>
-          <div class="about-tile-val">Remote / Hybrid</div>
+          <div class="about-tile-label" data-i18n="mode">Mode</div>
+          <div class="about-tile-val" data-i18n="mode_val">Remote / Hybrid</div>
         </div>
       </div>
     </div>
@@ -193,10 +186,10 @@
   <!-- CONTACT -->
   <section id="contact" class="contact-section">
     <div class="contact-inner reveal">
-      <div class="section-eyebrow">Contact</div>
-      <h2 class="section-title">Travaillons<br><em>ensemble.</em></h2>
-      <p>Un projet en tête ? Une collaboration à explorer ? Je suis ouvert à de nouvelles opportunités.</p>
-      <button class="btn-primary">Envoyer un message</button>
+      <div class="section-eyebrow" data-i18n="contact">Contact</div>
+      <h2 class="section-title" data-i18n="contact_title">Travaillons<br><em>ensemble.</em></h2>
+      <p data-i18n="contact_sub">Un projet en tête ? Une collaboration à explorer ? Je suis ouvert à de nouvelles opportunités.</p>
+      <button class="btn-primary" data-i18n="contact_btn">Envoyer un message</button>
     </div>
   </section>
 
@@ -214,16 +207,16 @@
   <!-- POPUP LOGIN -->
   <div class="login-popup" id="popup-login">
     <div class="login-box">
-      <h3>Connexion</h3>
+      <h3 data-i18n="login">Connexion</h3>
 
       <input type="email" id="login-email" placeholder="Email" />
       <input type="password" id="login-password" placeholder="Mot de passe" />
 
-      <button class="btn-primary" id="login-submit">Se connecter</button>
+      <button class="btn-primary" id="login-submit" data-i18n="login">Se connecter</button>
 
       <p class="popup-switch">
-        Pas de compte ?
-        <span id="open-register">Créer un compte</span>
+        <span data-i18n="no_account">Pas de compte ?</span>
+        <span id="open-register" data-i18n="register">Créer un compte</span>
       </p>
 
       <button class="close-popup" data-close>×</button>
@@ -233,16 +226,16 @@
   <!-- POPUP REGISTER -->
   <div class="login-popup" id="popup-register">
     <div class="login-box">
-      <h3>Créer un compte</h3>
+      <h3 data-i18n="register">Créer un compte</h3>
 
       <input type="email" id="reg-email" placeholder="Email" />
       <input type="password" id="reg-password" placeholder="Mot de passe" />
 
-      <button class="btn-primary" id="register-submit">Créer mon compte</button>
+      <button class="btn-primary" id="register-submit" data-i18n="register">Créer mon compte</button>
 
       <p class="popup-switch">
-        Déjà un compte ?
-        <span id="open-login-from-register">Connexion</span>
+        <span data-i18n="already_account">Déjà un compte ?</span>
+        <span id="open-login-from-register" data-i18n="login">Connexion</span>
       </p>
 
       <button class="close-popup" data-close>×</button>
@@ -252,8 +245,8 @@
   <!-- POPUP VERIFY -->
   <div class="login-popup" id="popup-verify">
     <div class="login-box">
-      <h3>Vérification email</h3>
-      <p class="verify-text">Un code à 6 chiffres a été envoyé.</p>
+      <h3 data-i18n="verify">Vérification email</h3>
+      <p class="verify-text" data-i18n="verify_desc">Un code à 6 chiffres a été envoyé.</p>
 
       <div class="verify-inputs">
         <input maxlength="1" class="vcode" />
@@ -264,7 +257,7 @@
         <input maxlength="1" class="vcode" />
       </div>
 
-      <button class="btn-primary" id="verify-submit">Vérifier</button>
+      <button class="btn-primary" id="verify-submit" data-i18n="verify">Vérifier</button>
 
       <button class="close-popup" data-close>×</button>
     </div>

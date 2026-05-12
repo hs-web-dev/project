@@ -869,3 +869,63 @@ footer {
     padding: 2rem 1.5rem;
   }
 }
+/* ============================
+   LANG SWITCH (Glassmorphism)
+   ============================ */
+
+.lang-switch {
+  position: relative;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(22, 26, 24, 0.6);
+  border-radius: 999px;
+  border: 1px solid rgba(200, 220, 210, 0.25);
+  padding: 0.35rem 0.9rem;
+  color: var(--text);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.lang-icon {
+  font-size: 1rem;
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: 2.6rem;
+  right: 0;
+  min-width: 160px;
+  background: rgba(22, 26, 24, 0.85);
+  border-radius: 0.9rem;
+  border: 1px solid rgba(200, 220, 210, 0.25);
+  padding: 0.4rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.2rem;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.lang-dropdown button {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.lang-dropdown button:hover {
+  background: rgba(255, 255, 255, 0.05);
+}

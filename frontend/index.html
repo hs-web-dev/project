@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>H.Tech — Portfolio</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@300;400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,26 +15,45 @@
   <!-- HEADER -->
   <header>
     <div class="logo">H.Tech</div>
+
     <nav>
       <a href="#projets">Projets</a>
       <a href="#about">À propos</a>
       <a href="#contact">Contact</a>
     </nav>
+
     <div class="header-right">
+
+      <!-- LANG SWITCH -->
+      <div class="lang-switch" id="lang-switch">
+        <button class="lang-btn">
+          <span class="lang-icon">🌐</span>
+          FR
+        </button>
+
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button data-lang="fr">🇫🇷 Français</button>
+          <button data-lang="en">🇬🇧 English</button>
+        </div>
+      </div>
+
+      <!-- BOUTON CONNEXION -->
       <button class="btn-connexion" id="open-login">Connexion</button>
 
-      <!-- MENU COMPTE (affiché si connecté) -->
+      <!-- MENU COMPTE -->
       <div class="account-menu" id="account-menu">
         <button class="account-btn" id="open-account-menu">
           Compte
           <span class="account-avatar">H</span>
         </button>
+
         <div class="account-dropdown" id="account-dropdown">
           <div class="account-email" id="account-email"></div>
           <button class="account-item" id="delete-account">Supprimer le compte</button>
           <button class="account-item" id="logout-btn">Déconnexion</button>
         </div>
       </div>
+
     </div>
   </header>
 
@@ -40,10 +61,12 @@
   <section class="hero">
     <div class="hero-img"></div>
     <div class="hero-overlay"></div>
+
     <div class="hero-content">
       <div class="hero-tag">Développeur Full-Stack & IA</div>
       <h1>Construire<br>le <em>futur.</em></h1>
-      <p class="hero-sub">Code, architecture, et intelligence artificielle — des projets pensés pour durer dans un monde en constante évolution.</p>
+      <p class="hero-sub">Code, architecture, et intelligence artificielle — des projets pensés pour durer.</p>
+
       <div class="hero-cta">
         <button class="btn-primary" id="scroll-to-projects">Voir mes projets</button>
         <button class="btn-ghost">
@@ -54,6 +77,7 @@
         </button>
       </div>
     </div>
+
     <div class="scroll-hint">
       <span>Scroll</span>
       <div class="scroll-line"></div>
@@ -83,73 +107,47 @@
         <div class="section-eyebrow">Sélection</div>
         <h2 class="section-title">Mes projets</h2>
       </div>
-      <button class="btn-ghost">
-        Tous les projets
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
     </div>
 
     <div class="projects-grid reveal">
-      <!-- Featured -->
       <div class="project-card featured">
         <div class="project-card-inner">
           <div>
             <div class="project-num">01 — Projet phare</div>
             <h3 class="project-title">Assistant Vocal IA</h3>
-            <p class="project-desc">Assistant complet avec reconnaissance vocale, API OpenAI, contrôle matériel temps réel et interface web réactive.</p>
+            <p class="project-desc">Assistant complet avec reconnaissance vocale, API OpenAI, contrôle matériel temps réel.</p>
             <div class="project-tags">
               <span class="tag">Python</span>
               <span class="tag">OpenAI</span>
               <span class="tag">WebSockets</span>
-              <span class="tag">Node.js</span>
             </div>
           </div>
+
           <div class="project-visual">
             <div class="code-anim">
               <span id="code-text"></span><span class="cursor"></span>
             </div>
           </div>
         </div>
-        <div class="project-arrow">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="var(--accent)" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-        </div>
       </div>
 
-      <!-- Card 2 -->
       <div class="project-card">
         <div class="project-num">02</div>
         <h3 class="project-title">Soundboard YouTube</h3>
-        <p class="project-desc">Extraction audio YouTube avec interface moderne, backend Node et lecture en temps réel.</p>
+        <p class="project-desc">Extraction audio YouTube avec interface moderne.</p>
         <div class="project-tags">
           <span class="tag">Node.js</span>
-          <span class="tag">ytdl</span>
           <span class="tag">Web Audio</span>
-        </div>
-        <div class="project-arrow">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="var(--accent)" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
         </div>
       </div>
 
-      <!-- Card 3 -->
       <div class="project-card">
         <div class="project-num">03</div>
         <h3 class="project-title">Site Web Dynamique</h3>
-        <p class="project-desc">Frontend moderne avec animations avancées, intégration API REST et design entièrement responsive.</p>
+        <p class="project-desc">Frontend moderne avec animations avancées.</p>
         <div class="project-tags">
           <span class="tag">React</span>
           <span class="tag">GSAP</span>
-          <span class="tag">Tailwind</span>
-        </div>
-        <div class="project-arrow">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="var(--accent)" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
         </div>
       </div>
     </div>
@@ -162,24 +160,28 @@
         <div class="section-eyebrow">À propos</div>
         <h2 class="section-title">Code avec intention.</h2>
         <p>Développeur passionné par l'intersection entre technologie et expérience utilisateur.</p>
+
         <ul class="skill-list">
-          <li>JavaScript / TypeScript</li>
+          <li>JavaScript</li>
           <li>Python</li>
-          <li>React / Next.js</li>
+          <li>React</li>
           <li>Node.js</li>
-          <li>IA & Machine Learning</li>
-          <li>Bases de données</li>
+          <li>IA</li>
+          <li>APIs</li>
         </ul>
       </div>
+
       <div class="about-visual reveal">
         <div class="about-tile">
           <div class="about-tile-label">Disponibilité</div>
           <div class="about-tile-val">Ouvert aux projets</div>
         </div>
+
         <div class="about-tile">
           <div class="about-tile-label">Localisation</div>
           <div class="about-tile-val">Paris, FR</div>
         </div>
+
         <div class="about-tile">
           <div class="about-tile-label">Mode</div>
           <div class="about-tile-val">Remote / Hybrid</div>
@@ -193,7 +195,7 @@
     <div class="contact-inner reveal">
       <div class="section-eyebrow">Contact</div>
       <h2 class="section-title">Travaillons<br><em>ensemble.</em></h2>
-      <p>Un projet en tête ? Une collaboration à explorer ? Je suis toujours ouvert à de nouvelles opportunités.</p>
+      <p>Un projet en tête ? Une collaboration à explorer ? Je suis ouvert à de nouvelles opportunités.</p>
       <button class="btn-primary">Envoyer un message</button>
     </div>
   </section>
@@ -209,7 +211,7 @@
     </div>
   </footer>
 
-  <!-- POPUP CONNEXION -->
+  <!-- POPUP LOGIN -->
   <div class="login-popup" id="popup-login">
     <div class="login-box">
       <h3>Connexion</h3>
@@ -228,7 +230,7 @@
     </div>
   </div>
 
-  <!-- POPUP INSCRIPTION -->
+  <!-- POPUP REGISTER -->
   <div class="login-popup" id="popup-register">
     <div class="login-box">
       <h3>Créer un compte</h3>
@@ -247,11 +249,11 @@
     </div>
   </div>
 
-  <!-- POPUP VÉRIFICATION EMAIL -->
+  <!-- POPUP VERIFY -->
   <div class="login-popup" id="popup-verify">
     <div class="login-box">
       <h3>Vérification email</h3>
-      <p class="verify-text">Un code à 6 chiffres a été envoyé à votre email.</p>
+      <p class="verify-text">Un code à 6 chiffres a été envoyé.</p>
 
       <div class="verify-inputs">
         <input maxlength="1" class="vcode" />

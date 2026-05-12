@@ -1,0 +1,45 @@
+{
+  "nav_projects": "Projects",
+  "nav_about": "About",
+  "nav_contact": "Contact",
+
+  "hero_tag": "Full‑Stack & AI Developer",
+  "hero_title": "Building<br>the <em>future.</em>",
+  "hero_sub": "Code, architecture and artificial intelligence — projects built to last.",
+  "see_projects": "See my projects",
+  "scroll": "Scroll",
+
+  "stats_projects": "Delivered projects",
+  "stats_years": "Years of experience",
+  "stats_lines": "Lines of passion",
+
+  "selection": "Selection",
+  "projects_title": "My projects",
+
+  "project_ai_assistant": "AI Voice Assistant",
+  "project_ai_desc": "Full assistant with speech recognition, OpenAI API, real-time hardware control.",
+  "project_soundboard": "YouTube Soundboard",
+  "project_soundboard_desc": "YouTube audio extraction with modern interface.",
+  "project_dynamic": "Dynamic Website",
+  "project_dynamic_desc": "Modern frontend with advanced animations.",
+
+  "about": "About",
+  "about_title": "Code with intention.",
+  "about_desc": "Developer passionate about the intersection of technology and user experience.",
+
+  "contact": "Contact",
+  "contact_title": "Let's work<br><em>together.</em>",
+  "contact_sub": "Have a project in mind? A collaboration to explore? I'm open to new opportunities.",
+  "contact_btn": "Send a message",
+
+  "login": "Login",
+  "register": "Create account",
+  "verify": "Email verification",
+  "verify_desc": "A 6‑digit code has been sent.",
+  "no_account": "No account?",
+  "already_account": "Already have an account?",
+
+  "account": "Account",
+  "delete_account": "Delete account",
+  "logout": "Logout"
+}

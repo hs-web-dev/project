@@ -1,0 +1,45 @@
+{
+  "nav_projects": "Projets",
+  "nav_about": "À propos",
+  "nav_contact": "Contact",
+
+  "hero_tag": "Développeur Full-Stack & IA",
+  "hero_title": "Construire<br>le <em>futur.</em>",
+  "hero_sub": "Code, architecture, et intelligence artificielle — des projets pensés pour durer.",
+  "see_projects": "Voir mes projets",
+  "scroll": "Scroll",
+
+  "stats_projects": "Projets livrés",
+  "stats_years": "Années d'expérience",
+  "stats_lines": "Lignes de passion",
+
+  "selection": "Sélection",
+  "projects_title": "Mes projets",
+
+  "project_ai_assistant": "Assistant Vocal IA",
+  "project_ai_desc": "Assistant complet avec reconnaissance vocale, API OpenAI, contrôle matériel temps réel.",
+  "project_soundboard": "Soundboard YouTube",
+  "project_soundboard_desc": "Extraction audio YouTube avec interface moderne.",
+  "project_dynamic": "Site Web Dynamique",
+  "project_dynamic_desc": "Frontend moderne avec animations avancées.",
+
+  "about": "À propos",
+  "about_title": "Code avec intention.",
+  "about_desc": "Développeur passionné par l'intersection entre technologie et expérience utilisateur.",
+
+  "contact": "Contact",
+  "contact_title": "Travaillons<br><em>ensemble.</em>",
+  "contact_sub": "Un projet en tête ? Une collaboration à explorer ? Je suis ouvert à de nouvelles opportunités.",
+  "contact_btn": "Envoyer un message",
+
+  "login": "Connexion",
+  "register": "Créer un compte",
+  "verify": "Vérification email",
+  "verify_desc": "Un code à 6 chiffres a été envoyé.",
+  "no_account": "Pas de compte ?",
+  "already_account": "Déjà un compte ?",
+
+  "account": "Compte",
+  "delete_account": "Supprimer le compte",
+  "logout": "Déconnexion"
+}

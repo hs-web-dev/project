@@ -279,48 +279,39 @@ document.getElementById("delete-account").onclick = async () => {
    ============================ */
 const langSwitch = document.getElementById("lang-switch");
 const langDropdown = document.getElementById("lang-dropdown");
-const langBtn = langSwitch.querySelector(".lang-btn");
+const langBtn = langSwitch?.querySelector(".lang-btn");
 
 // Ouvrir / fermer le menu
-langBtn.onclick = (e) => {
-  e.stopPropagation();
-  langDropdown.style.display =
-    langDropdown.style.display === "flex" ? "none" : "flex";
-};
-
-// Fermer si clic ailleurs
-document.addEventListener("click", (e) => {
-  if (!langSwitch.contains(e.target)) {
-    langDropdown.style.display = "none";
-  }
-});
-
-// Changer la langue
-langDropdown.querySelectorAll("button").forEach((btn) => {
-  btn.onclick = () => {
-    const lang = btn.dataset.lang;
-
-    // Sauvegarde
-    localStorage.setItem("lang", lang);
-
-    // Affichage du bouton
-    langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
-
-    // Recharge la page
-    location.reload();
+if (langBtn && langDropdown && langSwitch) {
+  langBtn.onclick = (e) => {
+    e.stopPropagation();
+    langDropdown.style.display =
+      langDropdown.style.display === "flex" ? "none" : "flex";
   };
-});
 
-/* ============================
-   INIT — Charger la langue
-   ============================ */
-window.addEventListener("load", () => {
-  const lang = localStorage.getItem("lang") || "fr";
+  // Fermer si clic ailleurs
+  document.addEventListener("click", (e) => {
+    if (!langSwitch.contains(e.target)) {
+      langDropdown.style.display = "none";
+    }
+  });
 
-  // Affiche la langue actuelle sur le bouton
-  langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
-});
+  // Changer la langue
+  langDropdown.querySelectorAll("button").forEach((btn) => {
+    btn.onclick = () => {
+      const lang = btn.dataset.lang;
 
+      // Sauvegarde
+      localStorage.setItem("lang", lang);
+
+      // Affichage du bouton
+      langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
+
+      // Charge la langue sans recharger la page
+      loadLanguage(lang);
+    };
+  });
+}
 
 /* ============================
    LOAD TRANSLATION
@@ -332,10 +323,12 @@ async function loadLanguage(lang) {
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
-      if (dict[key]) el.innerHTML = dict[key];
+      if (dict[key]) {
+        el.innerHTML = dict[key];
+      }
     });
-  } catch (e) {
-    console.error("Erreur chargement langue :", e);
+  } catch (err) {
+    console.error("Erreur chargement langue :", err);
   }
 }
 
@@ -344,9 +337,11 @@ async function loadLanguage(lang) {
    ============================ */
 window.addEventListener("load", () => {
   const lang = localStorage.getItem("lang") || "fr";
-  langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
-  loadLanguage(lang);
 
-  const token = localStorage.getItem("token");
-  if (token) showAccountMenu();
+  if (langBtn) {
+    langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
+  }
+
+  loadLanguage(lang);
 });
+

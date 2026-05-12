@@ -90,4 +90,27 @@ router.post("/login", async (req, res) => {
   res.json({ success: true, token });
 });
 
+/* -----------------------------
+   DELETE ACCOUNT — suppression
+   ----------------------------- */
+router.delete("/delete", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.json({ success: false });
+
+    const token = authHeader.split(" ")[1];
+    if (!token) return res.json({ success: false });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    await User.deleteOne({ email: decoded.email });
+
+    return res.json({ success: true });
+
+  } catch (err) {
+    console.error("Erreur suppression :", err);
+    return res.json({ success: false });
+  }
+});
+
 export default router;

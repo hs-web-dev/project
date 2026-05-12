@@ -1,13 +1,13 @@
 /* ============================
    SCROLL REVEAL
    ============================ */
-const revealEls = document.querySelectorAll('.reveal');
+const revealEls = document.querySelectorAll(".reveal");
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+        entry.target.classList.add("visible");
         revealObserver.unobserve(entry.target);
       }
     });
@@ -20,9 +20,9 @@ revealEls.forEach((el) => revealObserver.observe(el));
 /* ============================
    HERO IMAGE LOAD
    ============================ */
-const heroBg = document.querySelector('.hero-img');
+const heroBg = document.querySelector(".hero-img");
 if (heroBg) {
-  setTimeout(() => heroBg.classList.add('loaded'), 300);
+  setTimeout(() => heroBg.classList.add("loaded"), 300);
 }
 
 /* ============================
@@ -43,7 +43,7 @@ const codeLines = [
   "> voice.listen()",
   "> model: gpt-4o",
   "> tokens: 1024",
-  "> response: \"Bonjour!\"",
+  '> response: "Bonjour!"',
   "> status: ✓ online",
 ];
 
@@ -69,7 +69,8 @@ if (codeTextEl) {
     if (charIndex <= currentLine.length) {
       const prevLines = codeLines.slice(0, lineIndex).join("\n");
       const current = currentLine.slice(0, charIndex);
-      codeTextEl.textContent = prevLines + (lineIndex > 0 ? "\n" : "") + current;
+      codeTextEl.textContent =
+        prevLines + (lineIndex > 0 ? "\n" : "") + current;
       charIndex++;
       setTimeout(typeChar, 55);
     } else {
@@ -89,7 +90,8 @@ const popupLogin = document.getElementById("popup-login");
 const popupRegister = document.getElementById("popup-register");
 const popupVerify = document.getElementById("popup-verify");
 
-document.getElementById("open-login").onclick = () => popupLogin.classList.add("active");
+document.getElementById("open-login").onclick = () =>
+  popupLogin.classList.add("active");
 
 document.getElementById("open-register").onclick = () => {
   popupLogin.classList.remove("active");
@@ -101,7 +103,7 @@ document.getElementById("open-login-from-register").onclick = () => {
   popupLogin.classList.add("active");
 };
 
-document.querySelectorAll("[data-close]").forEach(btn => {
+document.querySelectorAll("[data-close]").forEach((btn) => {
   btn.onclick = () => btn.closest(".login-popup").classList.remove("active");
 });
 
@@ -126,7 +128,7 @@ vcodeInputs.forEach((input, idx) => {
 
 function getVerificationCode() {
   let code = "";
-  vcodeInputs.forEach(i => code += i.value);
+  vcodeInputs.forEach((i) => (code += i.value));
   return code;
 }
 
@@ -145,15 +147,15 @@ document.getElementById("register-submit").onclick = async () => {
   const res = await fetch(`${API_BASE}/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  }).then(r => r.json());
+    body: JSON.stringify({ email, password }),
+  }).then((r) => r.json());
 
   if (res.success) {
     popupRegister.classList.remove("active");
     popupVerify.classList.add("active");
     window.currentEmail = email;
   } else {
-    alert(res.message);
+    alert(res.message || "Erreur lors de l'inscription");
   }
 };
 
@@ -166,15 +168,15 @@ document.getElementById("verify-submit").onclick = async () => {
   const res = await fetch(`${API_BASE}/verify-email`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email: window.currentEmail, code })
-  }).then(r => r.json());
+    body: JSON.stringify({ email: window.currentEmail, code }),
+  }).then((r) => r.json());
 
   if (res.success) {
     popupVerify.classList.remove("active");
     popupLogin.classList.add("active");
     alert("Email vérifié !");
   } else {
-    alert(res.message);
+    alert(res.message || "Code invalide ou expiré");
   }
 };
 
@@ -188,8 +190,8 @@ document.getElementById("login-submit").onclick = async () => {
   const res = await fetch(`${API_BASE}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  }).then(r => r.json());
+    body: JSON.stringify({ email, password }),
+  }).then((r) => r.json());
 
   if (res.success) {
     localStorage.setItem("token", res.token);
@@ -213,13 +215,14 @@ const btnLogin = document.getElementById("open-login");
 const accountMenu = document.getElementById("account-menu");
 const accountDropdown = document.getElementById("account-dropdown");
 const accountEmailEl = document.getElementById("account-email");
+const logoutBtn = document.getElementById("logout-btn");
 
 function showAccountMenu() {
-  btnLogin.style.display = "none";
-  accountMenu.style.display = "block";
+  if (btnLogin) btnLogin.style.display = "none";
+  if (accountMenu) accountMenu.style.display = "block";
 
   const email = localStorage.getItem("email");
-  accountEmailEl.textContent = email;
+  if (accountEmailEl) accountEmailEl.textContent = email || "";
 }
 
 document.getElementById("open-account-menu").onclick = () => {
@@ -228,10 +231,20 @@ document.getElementById("open-account-menu").onclick = () => {
 };
 
 document.addEventListener("click", (e) => {
-  if (!accountMenu.contains(e.target) && e.target !== document.getElementById("open-account-menu")) {
+  if (
+    accountMenu &&
+    !accountMenu.contains(e.target) &&
+    e.target !== document.getElementById("open-account-menu")
+  ) {
     accountDropdown.style.display = "none";
   }
 });
+
+logoutBtn.onclick = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("email");
+  window.location.reload();
+};
 
 /* ============================
    DELETE ACCOUNT
@@ -241,11 +254,15 @@ document.getElementById("delete-account").onclick = async () => {
   if (!confirm("Dernière confirmation : supprimer définitivement ?")) return;
 
   const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Non connecté.");
+    return;
+  }
 
   const res = await fetch(`${API_BASE}/delete`, {
     method: "DELETE",
-    headers: { "Authorization": "Bearer " + token }
-  }).then(r => r.json());
+    headers: { Authorization: "Bearer " + token },
+  }).then((r) => r.json());
 
   if (res.success) {
     alert("Compte supprimé.");
@@ -265,7 +282,8 @@ const langDropdown = document.getElementById("lang-dropdown");
 const langBtn = langSwitch.querySelector(".lang-btn");
 
 // Ouvrir / fermer
-langBtn.onclick = () => {
+langBtn.onclick = (e) => {
+  e.stopPropagation();
   langDropdown.style.display =
     langDropdown.style.display === "flex" ? "none" : "flex";
 };
@@ -278,20 +296,40 @@ document.addEventListener("click", (e) => {
 });
 
 // Changer la langue
-langDropdown.querySelectorAll("button").forEach(btn => {
-  btn.onclick = () => {
+langDropdown.querySelectorAll("button").forEach((btn) => {
+  btn.onclick = (e) => {
+    e.stopPropagation();
     const lang = btn.dataset.lang;
     localStorage.setItem("lang", lang);
     langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
-    langDropdown.style.display = "none";
-    location.reload();
+    loadLanguage(lang);
   };
 });
 
-// Charger la langue au démarrage
+/* ============================
+   LOAD TRANSLATION
+   ============================ */
+async function loadLanguage(lang) {
+  try {
+    const res = await fetch(`./lang/${lang}.json`);
+    const dict = await res.json();
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key]) el.innerHTML = dict[key];
+    });
+  } catch (e) {
+    console.error("Erreur chargement langue :", e);
+  }
+}
+
+/* ============================
+   INIT
+   ============================ */
 window.addEventListener("load", () => {
   const lang = localStorage.getItem("lang") || "fr";
   langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
+  loadLanguage(lang);
 
   const token = localStorage.getItem("token");
   if (token) showAccountMenu();

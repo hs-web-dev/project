@@ -281,7 +281,6 @@ const langSwitch = document.getElementById("lang-switch");
 const langDropdown = document.getElementById("lang-dropdown");
 const langBtn = langSwitch?.querySelector(".lang-btn");
 
-// Ouvrir / fermer le menu
 if (langBtn && langDropdown && langSwitch) {
   langBtn.onclick = (e) => {
     e.stopPropagation();
@@ -289,25 +288,17 @@ if (langBtn && langDropdown && langSwitch) {
       langDropdown.style.display === "flex" ? "none" : "flex";
   };
 
-  // Fermer si clic ailleurs
   document.addEventListener("click", (e) => {
     if (!langSwitch.contains(e.target)) {
       langDropdown.style.display = "none";
     }
   });
 
-  // Changer la langue
   langDropdown.querySelectorAll("button").forEach((btn) => {
     btn.onclick = () => {
       const lang = btn.dataset.lang;
-
-      // Sauvegarde
       localStorage.setItem("lang", lang);
-
-      // Affichage du bouton
       langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
-
-      // Charger la langue
       loadLanguage(lang);
     };
   });
@@ -323,9 +314,7 @@ async function loadLanguage(lang) {
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
-      if (dict[key]) {
-        el.innerHTML = dict[key];
-      }
+      if (dict[key]) el.innerHTML = dict[key];
     });
   } catch (err) {
     console.error("Erreur chargement langue :", err);
@@ -337,10 +326,40 @@ async function loadLanguage(lang) {
    ============================ */
 window.addEventListener("load", () => {
   const lang = localStorage.getItem("lang") || "fr";
-
   if (langBtn) {
     langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
   }
-
   loadLanguage(lang);
 });
+
+/* ============================
+   PROJECTS SLIDER DRAG
+   ============================ */
+const slider = document.querySelector(".projects-slider");
+let isDown = false;
+let startX;
+let scrollLeft;
+
+if (slider) {
+  slider.addEventListener("mousedown", (e) => {
+    isDown = true;
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener("mouseleave", () => {
+    isDown = false;
+  });
+
+  slider.addEventListener("mouseup", () => {
+    isDown = false;
+  });
+
+  slider.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+}

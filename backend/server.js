@@ -19,10 +19,7 @@ app.use(cors({
   credentials: true,
 }));
 
-// IMPORTANT : gérer les requêtes preflight OPTIONS
 app.options("*", cors());
-
-
 
 mongoose
   .connect(process.env.MONGO_URI)

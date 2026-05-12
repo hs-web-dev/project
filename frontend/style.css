@@ -98,23 +98,83 @@ nav a:hover {
   color: var(--text);
 }
 
-.btn-essai {
-  font-family: var(--sans);
-  font-size: 0.82rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--bg);
-  background: var(--accent);
-  border: none;
-  border-radius: 999px;
-  padding: 0.55rem 1.4rem;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+/* ── ACCOUNT MENU (Glassmorphism) ── */
+.account-menu {
+  position: relative;
+  display: none; /* affiché si connecté */
 }
 
-.btn-essai:hover {
-  background: var(--accent2);
-  transform: translateY(-1px);
+.account-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(22, 26, 24, 0.6);
+  border-radius: 999px;
+  border: 1px solid rgba(200, 220, 210, 0.25);
+  padding: 0.35rem 0.9rem 0.35rem 0.9rem;
+  color: var(--text);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.account-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--bg);
+}
+
+.account-dropdown {
+  position: absolute;
+  top: 2.6rem;
+  right: 0;
+  min-width: 210px;
+  background: rgba(22, 26, 24, 0.85);
+  border-radius: 0.9rem;
+  border: 1px solid rgba(200, 220, 210, 0.25);
+  padding: 0.6rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.2rem;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.account-email {
+  font-size: 0.75rem;
+  color: var(--muted);
+  padding: 0.4rem 0.6rem 0.6rem;
+  border-bottom: 1px solid rgba(200, 220, 210, 0.15);
+  margin-bottom: 0.2rem;
+}
+
+.account-item {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.account-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.account-item#delete-account {
+  color: #ff8a80;
 }
 
 /* ── HERO ── */
@@ -127,7 +187,6 @@ nav a:hover {
   overflow: hidden;
 }
 
-/* Image de fond hero — photo circuit board / tech */
 .hero-img {
   position: absolute;
   inset: 0;
@@ -143,7 +202,6 @@ nav a:hover {
   transform: scale(1);
 }
 
-/* Dégradé sombre sur le fond */
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -677,61 +735,13 @@ footer {
   50%       { opacity: 0; }
 }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  header {
-    padding: 1rem 1.5rem;
-  }
-
-  nav {
-    display: none;
-  }
-
-  .hero-content {
-    padding: 0 1.5rem;
-  }
-
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  .stat-item {
-    border-right: none;
-    border-bottom: 0.5px solid var(--border);
-    padding: 2rem 1.5rem;
-  }
-
-  .projects-section {
-    padding: 5rem 1.5rem;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project-card.featured .project-card-inner {
-    grid-template-columns: 1fr;
-  }
-
-  .about-inner {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    padding: 5rem 1.5rem;
-  }
-
-  footer {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-    padding: 2rem 1.5rem;
-  }
-}
-/* ── POPUP LOGIN ── */
+/* ── POPUPS LOGIN / REGISTER / VERIFY ── */
 .login-popup {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: none;
   align-items: center;
   justify-content: center;
@@ -743,66 +753,14 @@ footer {
 }
 
 .login-box {
-  background: var(--surface2);
+  background: rgba(22, 26, 24, 0.95);
   padding: 2.5rem;
   border-radius: 1rem;
   width: 320px;
   position: relative;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(200, 220, 210, 0.25);
   animation: fadeUp 0.4s ease;
-}
-
-.login-box h3 {
-  font-family: var(--serif);
-  margin-bottom: 1.5rem;
-  font-size: 1.6rem;
-}
-
-.login-box input {
-  width: 100%;
-  padding: 0.8rem 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  font-size: 0.9rem;
-}
-
-.close-popup {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: none;
-  border: none;
-  font-size: 1.4rem;
-  color: var(--muted);
-  cursor: pointer;
-}
-/* POPUP SYSTEM */
-.login-popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(6px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
-}
-
-.login-popup.active {
-  display: flex;
-}
-
-.login-box {
-  background: var(--surface2);
-  padding: 2.5rem;
-  border-radius: 1rem;
-  width: 320px;
-  position: relative;
-  border: 1px solid var(--border);
-  animation: fadeUp 0.4s ease;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
 }
 
 .login-box h3 {
@@ -860,4 +818,54 @@ footer {
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  header {
+    padding: 1rem 1.5rem;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .hero-content {
+    padding: 0 1.5rem;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-item {
+    border-right: none;
+    border-bottom: 0.5px solid var(--border);
+    padding: 2rem 1.5rem;
+  }
+
+  .projects-section {
+    padding: 5rem 1.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card.featured .project-card-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 5rem 1.5rem;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
 }

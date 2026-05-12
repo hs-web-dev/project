@@ -20,6 +20,19 @@
     </nav>
     <div class="header-right">
       <button class="btn-connexion" id="open-login">Connexion</button>
+
+      <!-- MENU COMPTE (affiché si connecté) -->
+      <div class="account-menu" id="account-menu">
+        <button class="account-btn" id="open-account-menu">
+          Compte
+          <span class="account-avatar">H</span>
+        </button>
+        <div class="account-dropdown" id="account-dropdown">
+          <div class="account-email" id="account-email"></div>
+          <button class="account-item" id="delete-account">Supprimer le compte</button>
+          <button class="account-item" id="logout-btn">Déconnexion</button>
+        </div>
+      </div>
     </div>
   </header>
 

@@ -15,7 +15,6 @@ const revealObserver = new IntersectionObserver(
 
 revealEls.forEach((el) => revealObserver.observe(el));
 
-
 // ── HERO IMAGE PARALLAX LOAD ──
 const heroBg = document.querySelector('.hero-img');
 if (heroBg) {
@@ -24,7 +23,6 @@ if (heroBg) {
   img.onload = () => heroBg.classList.add('loaded');
 }
 
-
 // ── SCROLL TO PROJECTS ──
 const scrollBtn = document.getElementById('scroll-to-projects');
 if (scrollBtn) {
@@ -32,7 +30,6 @@ if (scrollBtn) {
     document.getElementById('projets').scrollIntoView({ behavior: 'smooth' });
   });
 }
-
 
 // ── TYPEWRITER IN HERO CODE BLOCK ──
 const codeLines = [
@@ -79,7 +76,6 @@ if (codeTextEl) {
   typeChar();
 }
 
-
 // ── HEADER SCROLL EFFECT ──
 const header = document.querySelector('header');
 
@@ -91,13 +87,16 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-
 // ── POPUP SYSTEM ──
 const popupLogin = document.getElementById("popup-login");
 const popupRegister = document.getElementById("popup-register");
 const popupVerify = document.getElementById("popup-verify");
 
-document.getElementById("open-login").onclick = () => popupLogin.classList.add("active");
+const openLoginBtn = document.getElementById("open-login");
+
+if (openLoginBtn) {
+  openLoginBtn.onclick = () => popupLogin.classList.add("active");
+}
 
 document.getElementById("open-register").onclick = () => {
   popupLogin.classList.remove("active");
@@ -114,38 +113,6 @@ document.querySelectorAll("[data-close]").forEach(btn => {
     btn.closest(".login-popup").classList.remove("active");
   };
 });
-
-
-// ── REGISTER (Créer un compte) ──
-document.getElementById("register-submit").onclick = async () => {
-  const email = document.getElementById("reg-email").value;
-  const password = document.getElementById("reg-password").value;
-
-  if (!email || !password) {
-    alert("Merci de remplir email et mot de passe.");
-    return;
-  }
-
-  const res = await fetch("https://project-nqj7.onrender.com/auth/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  }).then(r => r.json()).catch(err => {
-    console.error(err);
-    return { success: false, message: "Erreur réseau" };
-  });
-
-  console.log("REGISTER RESPONSE:", res);
-
-  if (res.success && res.needVerification) {
-    popupRegister.classList.remove("active");
-    popupVerify.classList.add("active");
-    window.currentEmail = email;
-  } else {
-    alert(res.message || "Erreur lors de l'inscription");
-  }
-};
-
 
 // ── GESTION DES 6 INPUTS DE CODE ──
 const vcodeInputs = document.querySelectorAll(".vcode");
@@ -174,6 +141,38 @@ function getVerificationCode() {
   return code;
 }
 
+// ── API BASE URL ──
+const API_BASE = "https://project-nqj7.onrender.com/auth";
+
+// ── REGISTER ──
+document.getElementById("register-submit").onclick = async () => {
+  const email = document.getElementById("reg-email").value;
+  const password = document.getElementById("reg-password").value;
+
+  if (!email || !password) {
+    alert("Merci de remplir email et mot de passe.");
+    return;
+  }
+
+  const res = await fetch(`${API_BASE}/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  }).then(r => r.json()).catch(err => {
+    console.error(err);
+    return { success: false, message: "Erreur réseau" };
+  });
+
+  console.log("REGISTER RESPONSE:", res);
+
+  if (res.success && res.needVerification) {
+    popupRegister.classList.remove("active");
+    popupVerify.classList.add("active");
+    window.currentEmail = email;
+  } else {
+    alert(res.message || "Erreur lors de l'inscription");
+  }
+};
 
 // ── VERIFY EMAIL ──
 document.getElementById("verify-submit").onclick = async () => {
@@ -184,7 +183,7 @@ document.getElementById("verify-submit").onclick = async () => {
     return;
   }
 
-  const res = await fetch("https://project-nqj7.onrender.com/auth/verify-email", {
+  const res = await fetch(`${API_BASE}/verify-email`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email: window.currentEmail, code })
@@ -204,7 +203,6 @@ document.getElementById("verify-submit").onclick = async () => {
   }
 };
 
-
 // ── LOGIN ──
 document.getElementById("login-submit").onclick = async () => {
   const email = document.getElementById("login-email").value;
@@ -215,7 +213,7 @@ document.getElementById("login-submit").onclick = async () => {
     return;
   }
 
-  const res = await fetch("https://project-nqj7.onrender.com/auth/login", {
+  const res = await fetch(`${API_BASE}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
@@ -229,6 +227,9 @@ document.getElementById("login-submit").onclick = async () => {
   if (res.success) {
     alert("Connexion réussie !");
     popupLogin.classList.remove("active");
+    localStorage.setItem("token", res.token);
+    localStorage.setItem("email", email);
+    showAccountMenu();
   } else if (res.needVerification) {
     popupLogin.classList.remove("active");
     popupVerify.classList.add("active");
@@ -237,3 +238,87 @@ document.getElementById("login-submit").onclick = async () => {
     alert("Email ou mot de passe incorrect");
   }
 };
+
+// ── ACCOUNT MENU LOGIC ──
+const btnLogin = document.getElementById("open-login");
+const accountMenu = document.getElementById("account-menu");
+const accountDropdown = document.getElementById("account-dropdown");
+const accountEmailEl = document.getElementById("account-email");
+const openAccountMenuBtn = document.getElementById("open-account-menu");
+
+function showAccountMenu() {
+  if (!btnLogin || !accountMenu) return;
+  btnLogin.style.display = "none";
+  accountMenu.style.display = "block";
+
+  const email = localStorage.getItem("email");
+  if (email && accountEmailEl) {
+    accountEmailEl.textContent = email;
+  }
+}
+
+if (openAccountMenuBtn) {
+  openAccountMenuBtn.onclick = () => {
+    if (accountDropdown.style.display === "flex") {
+      accountDropdown.style.display = "none";
+    } else {
+      accountDropdown.style.display = "flex";
+    }
+  };
+}
+
+// Fermer le menu compte si on clique ailleurs
+document.addEventListener("click", (e) => {
+  if (!accountMenu.contains(e.target) && e.target !== openAccountMenuBtn) {
+    accountDropdown.style.display = "none";
+  }
+});
+
+// Déconnexion
+document.getElementById("logout-btn").onclick = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("email");
+  window.location.reload();
+};
+
+// Suppression du compte
+document.getElementById("delete-account").onclick = async () => {
+  if (!confirm("Êtes-vous sûr de vouloir supprimer votre compte ?")) return;
+  if (!confirm("Dernière confirmation : supprimer définitivement ?")) return;
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Non connecté.");
+    return;
+  }
+
+  const res = await fetch(`${API_BASE}/delete`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  }).then(r => r.json()).catch(err => {
+    console.error(err);
+    return { success: false };
+  });
+
+  if (res.success) {
+    alert("Compte supprimé.");
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    window.location.reload();
+  } else {
+    alert("Erreur lors de la suppression du compte.");
+  }
+};
+
+// ── INIT : si déjà connecté, afficher menu compte ──
+window.addEventListener("load", () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    showAccountMenu();
+  } else {
+    if (btnLogin) btnLogin.style.display = "inline-block";
+    if (accountMenu) accountMenu.style.display = "none";
+  }
+});

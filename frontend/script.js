@@ -31,7 +31,8 @@ if (heroBg) {
 const scrollBtn = document.getElementById("scroll-to-projects");
 if (scrollBtn) {
   scrollBtn.onclick = () => {
-    document.getElementById("projets").scrollIntoView({ behavior: "smooth" });
+    const section = document.getElementById("projets");
+    if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 }
 
@@ -90,21 +91,32 @@ const popupLogin = document.getElementById("popup-login");
 const popupRegister = document.getElementById("popup-register");
 const popupVerify = document.getElementById("popup-verify");
 
-document.getElementById("open-login").onclick = () =>
-  popupLogin.classList.add("active");
+const btnOpenLogin = document.getElementById("open-login");
+if (btnOpenLogin && popupLogin) {
+  btnOpenLogin.onclick = () => popupLogin.classList.add("active");
+}
 
-document.getElementById("open-register").onclick = () => {
-  popupLogin.classList.remove("active");
-  popupRegister.classList.add("active");
-};
+const btnOpenRegister = document.getElementById("open-register");
+if (btnOpenRegister && popupRegister && popupLogin) {
+  btnOpenRegister.onclick = () => {
+    popupLogin.classList.remove("active");
+    popupRegister.classList.add("active");
+  };
+}
 
-document.getElementById("open-login-from-register").onclick = () => {
-  popupRegister.classList.remove("active");
-  popupLogin.classList.add("active");
-};
+const btnOpenLoginFromRegister = document.getElementById("open-login-from-register");
+if (btnOpenLoginFromRegister && popupRegister && popupLogin) {
+  btnOpenLoginFromRegister.onclick = () => {
+    popupRegister.classList.remove("active");
+    popupLogin.classList.add("active");
+  };
+}
 
 document.querySelectorAll("[data-close]").forEach((btn) => {
-  btn.onclick = () => btn.closest(".login-popup").classList.remove("active");
+  btn.onclick = () => {
+    const popup = btn.closest(".login-popup");
+    if (popup) popup.classList.remove("active");
+  };
 });
 
 /* ============================
@@ -140,73 +152,82 @@ const API_BASE = "https://project-nqj7.onrender.com/auth";
 /* ============================
    REGISTER
    ============================ */
-document.getElementById("register-submit").onclick = async () => {
-  const email = document.getElementById("reg-email").value;
-  const password = document.getElementById("reg-password").value;
+const btnRegisterSubmit = document.getElementById("register-submit");
+if (btnRegisterSubmit) {
+  btnRegisterSubmit.onclick = async () => {
+    const email = document.getElementById("reg-email")?.value || "";
+    const password = document.getElementById("reg-password")?.value || "";
 
-  const res = await fetch(`${API_BASE}/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  }).then((r) => r.json());
+    const res = await fetch(`${API_BASE}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    }).then((r) => r.json());
 
-  if (res.success) {
-    popupRegister.classList.remove("active");
-    popupVerify.classList.add("active");
-    window.currentEmail = email;
-  } else {
-    alert(res.message || "Erreur lors de l'inscription");
-  }
-};
+    if (res.success) {
+      if (popupRegister) popupRegister.classList.remove("active");
+      if (popupVerify) popupVerify.classList.add("active");
+      window.currentEmail = email;
+    } else {
+      alert(res.message || "Erreur lors de l'inscription");
+    }
+  };
+}
 
 /* ============================
    VERIFY EMAIL
    ============================ */
-document.getElementById("verify-submit").onclick = async () => {
-  const code = getVerificationCode();
+const btnVerifySubmit = document.getElementById("verify-submit");
+if (btnVerifySubmit) {
+  btnVerifySubmit.onclick = async () => {
+    const code = getVerificationCode();
 
-  const res = await fetch(`${API_BASE}/verify-email`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email: window.currentEmail, code }),
-  }).then((r) => r.json());
+    const res = await fetch(`${API_BASE}/verify-email`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: window.currentEmail, code }),
+    }).then((r) => r.json());
 
-  if (res.success) {
-    popupVerify.classList.remove("active");
-    popupLogin.classList.add("active");
-    alert("Email vérifié !");
-  } else {
-    alert(res.message || "Code invalide ou expiré");
-  }
-};
+    if (res.success) {
+      if (popupVerify) popupVerify.classList.remove("active");
+      if (popupLogin) popupLogin.classList.add("active");
+      alert("Email vérifié !");
+    } else {
+      alert(res.message || "Code invalide ou expiré");
+    }
+  };
+}
 
 /* ============================
    LOGIN
    ============================ */
-document.getElementById("login-submit").onclick = async () => {
-  const email = document.getElementById("login-email").value;
-  const password = document.getElementById("login-password").value;
+const btnLoginSubmit = document.getElementById("login-submit");
+if (btnLoginSubmit) {
+  btnLoginSubmit.onclick = async () => {
+    const email = document.getElementById("login-email")?.value || "";
+    const password = document.getElementById("login-password")?.value || "";
 
-  const res = await fetch(`${API_BASE}/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  }).then((r) => r.json());
+    const res = await fetch(`${API_BASE}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    }).then((r) => r.json());
 
-  if (res.success) {
-    localStorage.setItem("token", res.token);
-    localStorage.setItem("email", email);
+    if (res.success) {
+      localStorage.setItem("token", res.token);
+      localStorage.setItem("email", email);
 
-    popupLogin.classList.remove("active");
-    showAccountMenu();
-  } else if (res.needVerification) {
-    popupLogin.classList.remove("active");
-    popupVerify.classList.add("active");
-    window.currentEmail = email;
-  } else {
-    alert("Email ou mot de passe incorrect");
-  }
-};
+      if (popupLogin) popupLogin.classList.remove("active");
+      showAccountMenu();
+    } else if (res.needVerification) {
+      if (popupLogin) popupLogin.classList.remove("active");
+      if (popupVerify) popupVerify.classList.add("active");
+      window.currentEmail = email;
+    } else {
+      alert("Email ou mot de passe incorrect");
+    }
+  };
+}
 
 /* ============================
    ACCOUNT MENU
@@ -225,54 +246,63 @@ function showAccountMenu() {
   if (accountEmailEl) accountEmailEl.textContent = email || "";
 }
 
-document.getElementById("open-account-menu").onclick = () => {
-  accountDropdown.style.display =
-    accountDropdown.style.display === "flex" ? "none" : "flex";
-};
+const btnOpenAccountMenu = document.getElementById("open-account-menu");
+if (btnOpenAccountMenu && accountDropdown) {
+  btnOpenAccountMenu.onclick = () => {
+    accountDropdown.style.display =
+      accountDropdown.style.display === "flex" ? "none" : "flex";
+  };
+}
 
 document.addEventListener("click", (e) => {
   if (
     accountMenu &&
+    accountDropdown &&
     !accountMenu.contains(e.target) &&
-    e.target !== document.getElementById("open-account-menu")
+    e.target !== btnOpenAccountMenu
   ) {
     accountDropdown.style.display = "none";
   }
 });
 
-logoutBtn.onclick = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("email");
-  window.location.reload();
-};
+if (logoutBtn) {
+  logoutBtn.onclick = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    window.location.reload();
+  };
+}
 
 /* ============================
    DELETE ACCOUNT
    ============================ */
-document.getElementById("delete-account").onclick = async () => {
-  if (!confirm("Êtes-vous sûr de vouloir supprimer votre compte ?")) return;
-  if (!confirm("Dernière confirmation : supprimer définitivement ?")) return;
+const btnDeleteAccount = document.getElementById("delete-account");
+if (btnDeleteAccount) {
+  btnDeleteAccount.onclick = async () => {
+    if (!confirm("Êtes-vous sûr de vouloir supprimer votre compte ?")) return;
+    if (!confirm("Dernière confirmation : supprimer définitivement ?")) return;
 
-  const token = localStorage.getItem("token");
-  if (!token) {
-    alert("Non connecté.");
-    return;
-  }
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Non connecté.");
+      return;
+    }
 
-  const res = await fetch(`${API_BASE}/delete`, {
-    method: "DELETE",
-    headers: { Authorization: "Bearer " + token },
-  }).then((r) => r.json());
+    const res = await fetch(`${API_BASE}/delete`, {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + token },
+    }).then((r) => r.json());
 
-  if (res.success) {
-    alert("Compte supprimé.");
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    window.location.reload();
-  } else {
-    alert("Erreur lors de la suppression du compte.");
-  }
-};
+    if (res.success) {
+      alert("Compte supprimé.");
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      window.location.reload();
+    } else {
+      alert("Erreur lors de la suppression du compte.");
+    }
+  };
+}
 
 /* ============================
    LANG SWITCH
@@ -297,6 +327,8 @@ if (langBtn && langDropdown && langSwitch) {
   langDropdown.querySelectorAll("button").forEach((btn) => {
     btn.onclick = () => {
       const lang = btn.dataset.lang;
+      if (!lang) return;
+
       localStorage.setItem("lang", lang);
       langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
       loadLanguage(lang);
@@ -314,7 +346,9 @@ async function loadLanguage(lang) {
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
-      if (dict[key]) el.innerHTML = dict[key];
+      if (key && dict[key]) {
+        el.innerHTML = dict[key];
+      }
     });
   } catch (err) {
     console.error("Erreur chargement langue :", err);
@@ -326,10 +360,18 @@ async function loadLanguage(lang) {
    ============================ */
 window.addEventListener("load", () => {
   const lang = localStorage.getItem("lang") || "fr";
+
   if (langBtn) {
     langBtn.innerHTML = `<span class="lang-icon">🌐</span> ${lang.toUpperCase()}`;
   }
+
   loadLanguage(lang);
+
+  // Si déjà connecté, afficher le menu compte
+  const token = localStorage.getItem("token");
+  if (token) {
+    showAccountMenu();
+  }
 });
 
 /* ============================
